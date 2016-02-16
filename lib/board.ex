@@ -123,7 +123,7 @@ defmodule Board do
 
   @spec serializeSquare(tuple, binary) :: binary
 
-  defp serializeSquare({:e, _}, prev) do
+  defp serializeSquare({:e, :e}, prev) do
       if prev == "" or prev > "8" do
         "1"
       else
