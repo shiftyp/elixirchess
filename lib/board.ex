@@ -112,23 +112,21 @@ defmodule Board do
 
   defp serializeSquares([square | rest], index, prev, acc) do
     new = serializeSquare square, prev
-    case rest do
-      [] -> [acc | [prev, new]]
-      _ ->
-        if prev < "9" and prev > "0" and new < "9" do
-          serializeSquares(rest, index + 1, new, acc)
-        else
-          serializeSquares(rest, index + 1, new, [acc | prev])
-        end
+    cond do
+      rest == [] -> [acc | [prev, new]]
+      prev < "9" and prev > "0" and new < "9" ->
+        serializeSquares(rest, index + 1, new, acc)
+      true ->
+        serializeSquares(rest, index + 1, new, [acc | prev])
     end
   end
 
   @spec serializeSquare(tuple, binary) :: binary
 
   defp serializeSquare({:e, _}, prev) do
-     cond do
-      prev == "" or prev > "8" -> "1"
-      true ->
+      if prev == "" or prev > "8" do
+        "1"
+      else
         prev
           |> String.to_integer()
           |> + 1
