@@ -112,13 +112,13 @@ defmodule Board do
 
   def serializeBoard(board) do
     # We convert the board from a tuple since we'll be looking at the first elem.
-    # We start off at index 0 with an empty string and an empty accumulator. It's
-    # possible that it would be more performant to change the serialization logic
-    # To prepend items to the list, then reverse it at the end. This isn't how it's
-    # currently implemented.
+    # We start off at index 0 with an empty string and an empty accumulator. We
+    # actually build the symbol list by prepending the symbols, then reverse it
+    # at the end for performance reasons.
     board
       |> Tuple.to_list()
       |> serializeSquares(0, "", [])
+      |> Enum.reverse()
       |> List.to_string
   end
 
@@ -138,21 +138,21 @@ defmodule Board do
     # We pass an empty string as prev just like at the start of the process.
     new = serializeSquare square, ""
     # We don't treat the slash as a symbol, so we don't pass it to the next call.
-    serializeSquares(rest, index + 1, new, [acc | [prev, "/"]])
+    serializeSquares(rest, index + 1, new, [[prev, "/"] | acc])
   end
 
   defp serializeSquares([square | rest], index, prev, acc) do
     new = serializeSquare square, prev
     cond do
       # If we're at the end of the list, finish it up.
-      rest == [] -> [acc | [prev, new]]
+      rest == [] -> [[prev, new] | acc]
       # If the previous and current square are both empty.
       prev < "9" and prev > "0" and new < "9" ->
         serializeSquares(rest, index + 1, new, acc)
       # Otherwise we append the previous to the accumulator and move on to the
       # next call.
       true ->
-        serializeSquares(rest, index + 1, new, [acc | prev])
+        serializeSquares(rest, index + 1, new, [prev | acc])
     end
   end
 
