@@ -149,7 +149,7 @@ defmodule Board do
       # If the previous and current square are both empty.
       prev < "9" and prev > "0" and new < "9" ->
         serializeSquares(rest, index + 1, new, acc)
-      # Otherwise we append the previous to the accumulator and move on to the
+      # Otherwise we prepend the previous to the accumulator and move on to the
       # next call.
       true ->
         serializeSquares(rest, index + 1, new, [prev | acc])
