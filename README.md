@@ -1,6 +1,6 @@
-# Elixirchess
+# ElixirChess
 
-**TODO: Add description**
+ElixirChess is going to be a set of modules for processing chess games and validating moves. At the moment it only contains a Board module for converting a FEN position to a special board tuple and back to a FEN position. More to come.
 
 ## Installation
 
@@ -17,4 +17,3 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         def application do
           [applications: [:elixirchess]]
         end
-
