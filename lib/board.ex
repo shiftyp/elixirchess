@@ -79,7 +79,7 @@ defmodule Board do
   @doc """
   The serializeBoard function takes a board (the tuple returned from create board)
   and returns a position suitible for putting in a fen string. It is the inverse
-  of createBoard. For example:
+  of parsePosition. For example:
 
   iex> Board.serializeBoard({
   ...>  {:r, :b}, {:n, :b}, {:b, :b}, {:q, :b}, {:k, :b}, {:b, :b}, {:n, :b}, {:r, :b},
