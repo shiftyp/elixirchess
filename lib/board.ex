@@ -91,7 +91,7 @@ defmodule Board do
   end
 
   @doc """
-  The serializeBoard function takes a board (the tuple returned from create board)
+  The serializeBoard function takes a board (the tuple returned from parsePosition)
   and returns a position suitible for putting in a fen string. It is the inverse
   of parsePosition. For example:
 
